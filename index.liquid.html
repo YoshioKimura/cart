@@ -1,0 +1,661 @@
+<style>
+
+  body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue";
+  }
+  
+  .subsectionHeader {
+      position: relative;
+      margin-top: 15px;
+      border: solid #f8d8d8;
+      border-width: 1px 0;
+      padding: 8px 10px;
+      background: #f3f3f3;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.416666667;
+  }
+  
+  .soldout {
+      color: #808080;
+  }
+  
+  .cartbox {
+      display: flex;
+  }
+  
+  .cartbox .img,
+  .cartbox .stock,
+  .cartbox .cart {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+  }
+  
+  .cartbox .img {
+      width: 25%;
+      height: auto;
+      position: relative;
+  }
+  
+  .img .colorVal {
+      position: absolute;
+      top: 48px;
+      left: 22px;
+  }
+  
+  
+  
+  .cartbox .stock {
+      height: 50px;
+      border-bottom: 1px solid #ccc;
+      font-size: 12px;
+      text-align: left;
+      width: 20%;
+      padding-left: 10px;
+      word-break: break-word;
+  }
+  
+  .cartbox .cart {
+      height: 50px;
+      width: 50%;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+  }
+  
+  .btn-cart {
+      background: #555;
+      border-radius: 4px;
+      width: 100%;
+      height: 35px;
+      position: relative;
+      text-align: left;
+      border-radius: 2px;
+      margin: auto;
+      text-align: center;
+  }
+  
+  .soldout {
+      color: #808080;
+      border-radius: 4px;
+      width: 100%;
+      height: 35px;
+      position: relative;
+      text-align: left;
+      border-radius: 2px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .btn-cart div {
+      color: #fff;
+      height: 35px;
+      padding: 3px 0 0px;
+      border: 0;
+      display: inline-block;
+      cursor: pointer;
+      font-size: 15px;
+      height: 23px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+  }
+  
+  div[class^='indexList'] {
+      width: 100%;
+  }
+  
+  .img-icon img{
+      /* margin-left: 20px; */
+      width: 45px;
+      position: absolute;
+      left: 15px;
+  }
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    .timeline {
+      margin: 3em auto;
+      max-width: 500px;
+      list-style: none;
+      background-color: #fff;
+      box-shadow: 0 3px 20px rgba(184, 184, 141, 0.3);
+    }
+  
+    .timeline>li {
+      padding: 1.4em 1.5em 1.4em 5em;
+      cursor: pointer;
+    }
+  
+    .timeline>li+li {
+      border-top: 1px solid #eaeae0;
+    }
+  
+    .timeline>li::after {
+      display: table;
+      content: '';
+      clear: both;
+    }
+  
+    .timeline>li:hover {
+      background-color: #fdfdf6;
+    }
+  
+    .avatar {
+      float: left;
+      margin-left: -3.5em;
+      width: 54px;
+      height: 54px;
+      border-radius: 100%;
+      background-color: #eee;
+    }
+  
+    .content {
+      margin-left: .9em;
+    }
+  
+    .content>span {
+      display: inline-block;
+      margin-bottom: .2em;
+      font-weight: bold;
+    }
+  
+    .content>p {
+      text-align: justify;
+      text-justify: inter-ideograph;
+      line-height: 1.4;
+      font-size: .95em;
+    }
+  
+    .overlay_comm_media {
+      display: none;
+      position: fixed;
+      top: -10px;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      background-color: rgba(0, 0, 0, .45);
+      overflow: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      z-index: 999999;
+    }
+  
+    .container_comm_media {
+      display: table;
+      padding: 10px 0;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .inner_comm_media {
+      display: table-cell;
+      padding: 30px 15px;
+      vertical-align: middle;
+    }
+  
+    .modal_comm_media {
+      margin: 0 auto;
+      padding: 10px 0px;
+      max-width: 550px;
+      text-align: justify;
+      text-justify: inter-ideograph;
+      border-radius: 7px;
+      background-color: #fff;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+    }
+  
+    .modal_comm_media::after {
+      display: table;
+      content: '';
+      clear: both;
+    }
+  
+    .modal_comm_media>p {
+      text-indent: 1em;
+      line-height: 1.7;
+    }
+  
+    .button {
+      float: right;
+      margin-top: .8em;
+      padding: .5em 1.4em;
+      color: #fff;
+      font-size: .95em;
+      border: 0;
+      border-radius: 4px;
+      outline: 0;
+      background-color: #e57373;
+      cursor: pointer;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+  
+    .button:hover {
+      background-color: #dd7979;
+    }
+  
+    .modal_comm_media{
+      position: relative;
+    }
+        
+      .modal-label_comm_media{
+        position: absolute;
+        top: -20px;
+        right: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        background: #099;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    
+      .modal-label_comm_media svg{
+        display: flex;
+        align-items: center;
+        fill: #fff;
+      }
+      
+  
+  </style>
+  
+  
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  
+      <p>ほげほげ</p>
+  
+    
+  {% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+  {% form 'product', product, id: form_id, class: 'product-single__form' %}
+     {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+         {% for option in product.options_with_values %}
+                {% if settings.variant_type == 'button' %}
+                     {% include 'variant-button', section_id: section_id, option_drop: option %}
+                {% else %}
+                     {% include 'variant-dropdown', section_id: section_id %}
+                {% endif %}
+         {% endfor %}
+     {% endunless %}
+  
+  <script>
+  console.log("{{ product.title | upcase }}");  
+  </script>
+  
+  
+  <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
+  {% for variant in product.variants %}
+  {% if variant.available %}
+  
+  <option {% if variant == product.selected_or_first_available_variant %}
+  selected="selected" {% endif %}
+  value="{{ variant.id }}">
+  {{ variant.title }} - {{ variant.price | money_with_currency }}
+  </option>
+  {% else %}
+  <option disabled="disabled">
+  {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+  </option>
+  {% endif %}
+  {% endfor %}
+  </select>
+  
+  
+  {% if settings.quantity_enable %}
+  <div class="product__quantity product__quantity--{{ settings.variant_type }} js-qty">
+  <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
+  <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+  </div>
+  {% endif %}
+  
+  
+  <div class="sku-price-box">
+  {% if settings.sku_enable %}
+  <p id="Sku-{{ section_id }}" class="product-single__sku">
+  {% if current_variant.sku %}
+  {{ current_variant.sku }}
+  {% endif %}
+  </p>
+  {% endif %}
+  
+  {% if product.compare_at_price_max > product.price %}
+  {%- assign hide_sale_price = true -%}
+  {% if current_variant.compare_at_price %}
+  {%- assign hide_sale_price = false -%}
+  {% endif %}
+  <span id="PriceA11y-{{ section_id }}" class="visually-hidden" aria-hidden="{{ hide_sale_price }}">
+  {{ 'products.general.regular_price' | t }}
+  </span>
+  <span class="product__price-wrap-{{ section_id }}{% if hide_sale_price %} hide{% endif %}">
+  <span id="ComparePrice-{{ section_id }}" class="product__price product__price--compare">
+  {% if current_variant.compare_at_price > current_variant.price %}
+  {{ current_variant.compare_at_price | money }}
+  {% endif %}
+  </span>
+  </span>
+  <span id="ComparePriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+  {% else %}
+  <span id="PriceA11y-{{ section_id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+  {% endif %}
+  
+  <span id="ProductPrice-{{ section_id }}"
+  class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+  itemprop="price"
+  content="{{ current_variant.price | divided_by: 100.00 }}">
+  <b>{{ current_variant.price | money }}</b>
+  </span>
+  
+  <span class="tax-in"> (税込)</span>
+      <p> ふがふが</p>
+  {% if settings.inventory_enable %}
+  <script>
+  // Store inventory quantities in JS because they're no longer
+  // available directly in JS when a variant changes.
+  // Have an object that holds all potential products so it works
+  // with quick view or with multiple featured products.
+  window.inventories = window.inventories || {};
+  window.inventories['{{section_id}}'] = {};
+  var inv_qty = {};
+   {% for variant in product.variants %}
+  window.inventories['{{section_id}}'][{{variant.id}}] = {{ variant.inventory_quantity | default: 0 }};
+   {% endfor %}
+  </script>
+  
+  
+  {%- assign inventory_visible = false -%}
+  {% if current_variant.inventory_management == 'shopify' %}
+  {%- assign inventory_visible = true -%}
+  {% endif %}
+  {% if current_variant.inventory_quantity == 0 %}
+  {%- assign inventory_visible = false -%}
+  {% endif %}
+  
+  <div
+  id="ProductInventory-{{ section_id }}"
+  class="product__inventory {% unless inventory_visible %}hide{% endunless %}"
+  >
+  {% if current_variant.available %}
+  {{ 'products.product.stock_label' | t: count: current_variant.inventory_quantity }}
+  {% endif %}
+  </div>
+  {% endif %}
+  
+  <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+  <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+  
+  </div>
+  
+  
+  {% if settings.enable_payment_button %}
+  <div class="payment-buttons">
+  {% endif %}
+  
+  <button
+  {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+  name="add"
+  id="AddToCart-{{ section_id }}"
+  class="{% if settings.enable_payment_button %}btn--tertiary{% else %}btn{% endif %} btn--full add-to-cart"
+  {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+  <span id="AddToCartText-{{ section_id }}">
+  {% if current_variant.available %}
+  {{ 'products.product.add_to_cart' | t }}
+  {% else %}
+  {{ 'products.product.sold_out' | t }}
+  {% endif %}
+  </span>
+  </button>
+  
+    
+    
+  {% if settings.enable_payment_button %}
+  {{ form | payment_button }}
+  {% endif %}
+  
+  
+  
+    
+  {% if settings.enable_payment_button %}
+  </div>
+  {% endif %}
+  {% endform %}
+  
+  
+    <div class="overlay_comm_media">
+          <div class="container_comm_media">
+              <div class="inner_comm_media">
+                  <section class="modal_comm_media">
+                      <label class="modal-label_comm_media close-mdl" for="modal-check">
+                          <svg width="16" height="16">
+                              <polygon points="14.4,3.1 12.9,1.6 8,6.6 3.1,1.6 1.6,3.1 6.6,8 1.6,12.9 3.1,14.4 8,9.4 12.9,14.4 14.4,12.9 9.4,8 "> </polygon>
+                          </svg>
+                      </label>
+                      <p class="modal-content-wrapper">
+                          <div style="text-align: center;">カートに入れる</div>
+                          <div class="modal-content"></div>
+                      </p>
+                  </section>
+              </div>
+          </div>
+      </div> 
+  
+  
+  
+  
+  <script>
+    $(function(){
+    
+   
+          $('.overlay_comm_media').appendTo('body');
+      var formElm =  document.querySelectorAll(".variant-input-wrap");
+        var formElm2 =  document.querySelectorAll(".variant__label");
+      var idxs = document.querySelector("select[name='id']").style.display = "block";
+    for(var i = 0; i < formElm.length; i++ ){
+      //formElm[i].style.display  = "none";
+    }
+      for(var i = 0; i < formElm2.length; i++ ){
+      //formElm2[i].style.visibility  = "hidden";
+    }
+    
+  
+    
+            var array = []
+          var num = 0;
+          function GetColorArrayByclickRadioBtn() {
+              var radios = document.querySelectorAll("input[name='Color']");
+              var timer = setInterval(function () {
+                  if (num >= radios.length) {
+                      clearInterval(timer);
+                      return array;
+                  }
+                  radios[num].click();
+                  var imagePath = document.querySelector('.slick-active img[class^="animation-delay-"]').getAttribute('srcset').split(',')[0].split(' ')[0]                
+                  array.push(imagePath);
+                  //とってきた値から色名を文字列で探して変数activeColorに入れる
+                  // var activeColor = document.querySelector(`label[for='${radios[num].getAttribute('id')}']`).innerText.split(" ")[1];
+                  var activeColor = radios[num].getAttribute('value');
+                  console.log(activeColor);
+                  //activeColorを含むデータを探して、その要素のやつを画像に差し替える
+                  $(`[data-img*='${activeColor}']`).attr('src', imagePath)
+                  num++;
+              }, 1500);
+          }
+  
+          setTimeout(function(){
+              GetColorArrayByclickRadioBtn();
+          },1000)
+    
+          function makeObjArrayByOptionVal() {
+              var optionElms = document.querySelectorAll("select[name='id'] > option");
+              var OptionValObjArray = [];
+              var OptionValObjSizeArray = [];
+              var OptionValObjItemIdArray = [];
+              for (var i = 0; i < optionElms.length; i++) {
+                  var OptionValObj = {};
+                  var splitedOptionElms = optionElms[i].innerHTML.replace(/\r\n/, '').split(' ').filter(function (e) {
+                      return e !== "";
+                  });
+                if(i == 0){
+                  for(var x = 0; x < splitedOptionElms.length;x++){
+                    console.log(x + " : " +splitedOptionElms[x]);
+                    
+                  }
+                }
+                  OptionValObj.itemId = optionElms[i].value.split(' ')[0];
+                  var proceIndex = splitedOptionElms.indexOf("¥");
+                  console.log("proceIndex" + proceIndex);
+                  console.log(splitedOptionElms);
+                  OptionValObj.color = splitedOptionElms[0];
+                  OptionValObj.size = splitedOptionElms[0];
+                  OptionValObj.price = splitedOptionElms[4];
+                  OptionValObjArray.push(OptionValObj);
+              }
+              var result = {};
+              OptionValObjArray.map(function (i, j) {
+                  var color = i["color"];
+                  if (typeof result[color] == "undefined") result[color] = [];
+                  result[color].push(i);
+              });
+              var colorIndex = 0;
+              for (const size in result) {
+                  var tmpImg = "";
+                  var html = "";
+                  if (result.hasOwnProperty(size)) {
+                      html += `<div class="indexList">
+                          <div class="subsectionHeader">${size}</div>`
+                      var htmlItem = "";
+                      for (let i = 0; i < result[size].length; i++) {
+                          if (i == 0) {
+                              var imgIcon = `<div class="img-icon"><img data-img="${size}" src="${tmpImg}" alt=""></div>`
+                              colorIndex++;
+                          }
+                          else {
+                              var imgIcon = '';
+                          }
+                          var colorVal = i == 0 ? result[size].color : '';
+                          console.log(result[size][i]);
+                          if(result[size][i].price == undefined) result[size][i].price = ""; 
+                          var cartBtn = result[size][i].price.indexOf('SOLD') != -1 ? renderCartBtn(0, '') : renderCartBtn(1, result[size][i].itemId);
+  
+                          htmlItem += `<div class="indexItem">
+                                          <div class="cartbox">
+                                              <div class="img">${imgIcon}</div>
+                                              <div class="stock">${result[size][i].size}</div>
+                                              <div class="cart">${cartBtn}</div>
+                                          </div>
+                                  </div>`
+                      }
+                      html += htmlItem + `</div></div>`
+                      if (isMobile()) {
+                          $(".modal-content").append(html);
+                          $("button[id^='AddToCart-']").attr('type','button').addClass('button_sp');
+                      } else {
+                          $(".variant-wrapper:first").append(html);
+                         document.querySelector("[class^='shopify-payment-button']").style.display = 'none';
+                         document.querySelector("button[id^='AddToCart-']").style.display = 'none';
+  
+                      }
+                  }
+              }
+              /*
+               * 売り切れなら売り切れのボタン要素を返す
+               * @param {int} 0なら在庫あり、1なら在庫なし
+               * @return {String} HTML要素を文字列で
+               */
+              function renderCartBtn(status, itemId) {
+                  if (status == 1) {
+                      return `<button type="submit" class="btn-cart add-to-cart add-to-cart_comm_media"  name="add" data-value=${itemId}><div> カートに入れる</div></button>`;
+                  }
+                  else if (status == 0) {
+                      return `<div class="soldout"><div>完売しました</div></div>`;
+                  }
+              }
+          }
+          makeObjArrayByOptionVal();
+  
+          /**
+           * モバイルかどうか判定する
+           * @param {array}文字列 , {array}
+           * @return {boolean} モバイルならtrue,それ以外ならfalse
+           */
+          function isMobile() {
+              if (window.innerWidth > 639) {
+                  return false;
+              }
+              else {
+                  return true;
+              }
+          }
+          //カートへ入れるをクリックした時、POSTリクエストを送信
+          $(".add-to-cart_comm_media").click(function () {
+              $("select[name='id'] option").attr("selected", false);
+              $("select[name='id']").val($(this).attr('data-value'));
+              $("form[action='/cart/add']").submit();
+          });
+          var current_scrollY;
+  
+          
+              var $window = $(window)
+                  , $html = $('html')
+                  , $body = $('body')
+                  , $overlay = $('.overlay_comm_media')
+                  , scrollbar_width = window.innerWidth - document.body.scrollWidth
+                  , touch_start_y;
+              $window.on('touchstart', function (event) {
+                  touch_start_y = event.originalEvent.changedTouches[0].screenY;
+              });
+              $(document).on('click',".button_sp", function () {
+                  $window.on('touchmove.noscroll', function (event) {
+                      var overlay = $overlay[0]
+                          , current_y = event.originalEvent.changedTouches[0].screenY
+                          , height = $overlay.outerHeight()
+                          , is_top = touch_start_y <= current_y && overlay.scrollTop === 0
+                          , is_bottom = touch_start_y >= current_y && overlay.scrollHeight - overlay.scrollTop === height;
+                      if (is_top || is_bottom) {
+                          event.preventDefault();
+                      }
+                  });
+  
+                  $('html, body').css('overflow', 'hidden');
+                  if (scrollbar_width) {
+                      $html.css('padding-right', scrollbar_width);
+                  }
+                console.log($overlay);
+                  $overlay.fadeIn(300);
+              });
+            
+              var closeModal = function () {
+                  $body.removeAttr('style');
+                  $window.off('touchmove.noscroll');
+                  $overlay.animate({
+                      opacity: 0
+                  }, 300, function () {
+                      $overlay.scrollTop(0).hide().removeAttr('style');
+                      $html.removeAttr('style');
+                  });
+              };
+              $overlay.on('click', function (event) {
+                  if (!$(event.target).closest('.modal_for_commerce_media').length) {
+                      closeModal();
+                  }
+              });
+              $('.close-mdl').on('click', function () {
+                  closeModal();
+              });
+      
+      })
+      </script>
